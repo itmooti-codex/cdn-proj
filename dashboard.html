@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <p>Welcome, <span id="user-email"></span>!</p>
+        <h3>Your CDN Script</h3>
+        <p>Copy this script tag and add it to your website:</p>
+        <pre id="cdn-script"></pre>
+        <button class="copyButton">Copy Script</button>
+        <button id="logout-button">Log Out</button>
+        <p id="error-message" style="color: red;"></p>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgGABh-MHEnglr-BajqszMWMqGnwuBack",
+            authDomain: "cdn-project-a8418.firebaseapp.com",
+            projectId: "cdn-project-a8418",
+            storageBucket: "cdn-project-a8418.firebasestorage.app",
+            messagingSenderId: "181360244898",
+            appId: "1:181360244898:web:08ba8c945eaf5838737ffb",
+            measurementId: "G-WTXCMGYKZK"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-email').textContent = user.email;
+
+                const userScript = `<script src="https://dpes44.github.io/cdn-project/cdn.js" data-uid="${uid}"><\/script>`;
+
+                document.getElementById('cdn-script').textContent = userScript;
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        document.getElementById('logout-button').addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = 'index.html';
+            } catch (error) {
+                document.getElementById('error-message').textContent = error.message;
+            }
+        });
+
+        function copyScript() {
+            const scriptText = document.getElementById('cdn-script').textContent;
+            navigator.clipboard.writeText(scriptText).then(() => {
+                alert('Script copied to clipboard!');
+            }).catch((error) => {
+                document.getElementById('error-message').textContent = 'Failed to copy script: ' + error.message;
+            });
+        }
+
+        document.querySelector('.copyButton').addEventListener('click', () => {
+            const scriptText = document.getElementById('cdn-script').textContent;
+            navigator.clipboard.writeText(scriptText).then(() => {
+                alert('Script copied to clipboard!');
+            }).catch((error) => {
+                document.getElementById('error-message').textContent = 'Failed to copy script: ' + error.message;
+            });
+        });
+
+    </script>
+</body>
+
+</html>
