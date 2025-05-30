@@ -18,6 +18,22 @@ Example embed code:
 
 The script will fetch `user-data/YOUR_UID.json` from the GitHub pages site and display the contents.
 
+### Adding Your Data
+
+For the snippet to work you need to create a JSON file under the `user-data` directory
+named after your UID. For example, if your UID is `abc123` create `user-data/abc123.json`
+with the following structure:
+
+```json
+{
+  "title": "Hello from CDN",
+  "message": "This is your custom widget content."
+}
+```
+
+Commit this file to the repository (or host it on your own GitHub Pages site) so
+that `cdn.js` can fetch it when your snippet loads.
+
 ## Development
 
 The frontend logic is organized into small ES modules under `src/`:
