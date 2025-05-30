@@ -1,7 +1,6 @@
-(function () {
-  const scripts = document.getElementsByTagName('script');
-  const thisScript = scripts[scripts.length - 1];
-  const uid = thisScript.getAttribute('data-uid');
+(() => {
+  const script = document.currentScript;
+  const uid = script.getAttribute('data-uid');
   const root = document.getElementById('cdn-root');
 
   if (!root) {
@@ -15,13 +14,13 @@
   }
 
   fetch(`https://dpes44.github.io/cdn-project/user-data/${uid}.json`)
-    .then(response => {
-      if (!response.ok) {
+    .then((res) => {
+      if (!res.ok) {
         throw new Error(`User data not found for UID: ${uid}`);
       }
-      return response.json();
+      return res.json();
     })
-    .then(data => {
+    .then((data) => {
       const container = document.createElement('div');
       container.style.backgroundColor = '#e0f7fa';
       container.style.padding = '20px';
@@ -29,11 +28,10 @@
       container.style.textAlign = 'center';
       container.innerHTML = `
         <h3>${data.title || 'Welcome!'}</h3>
-        <p>${data.message || 'This is your personalized CDN widget.'}</p>
-      `;
+        <p>${data.message || 'This is your personalized CDN widget.'}</p>`;
       root.appendChild(container);
     })
-    .catch(error => {
+    .catch((error) => {
       root.innerHTML = `<p style="color: red;">CDN Error: ${error.message}</p>`;
     });
 })();
