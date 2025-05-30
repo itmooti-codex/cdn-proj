@@ -13,7 +13,7 @@
     return;
   }
 
-  fetch(`https://dpes44.github.io/cdn-project/user-data/${uid}.json`)
+  fetch(`https://itmooti-codex.github.io/cdn-proj/user-data/${uid}.json`)
     .then((res) => {
       if (!res.ok) {
         throw new Error(`User data not found for UID: ${uid}`);
