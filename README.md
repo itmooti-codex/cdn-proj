@@ -13,7 +13,7 @@ Example embed code:
 
 ```html
 <div id="cdn-root"></div>
-<script src="https://dpes44.github.io/cdn-project/cdn.js" data-uid="YOUR_UID"></script>
+<script src="https://itmooti-codex.github.io/cdn-proj/cdn.js" data-uid="YOUR_UID"></script>
 ```
 
 The script will fetch `user-data/YOUR_UID.json` from the GitHub pages site and display the contents.

@@ -13,7 +13,7 @@ const errorMessage = document.getElementById('error-message');
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById('user-email').textContent = user.email;
-    const script = `<script src="https://dpes44.github.io/cdn-project/cdn.js" data-uid="${user.uid}"><\/script>`;
+    const script = `<script src="https://itmooti-codex.github.io/cdn-proj/cdn.js" data-uid="${user.uid}"><\/script>`;
     cdnScriptEl.textContent = script;
   } else {
     window.location.href = 'index.html';
